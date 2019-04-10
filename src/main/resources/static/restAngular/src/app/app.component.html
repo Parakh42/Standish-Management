@@ -1,0 +1,105 @@
+<div class="container">
+  <br />
+  <h1 style="text-align: center; color:burlywood">Welcome to {{title}}</h1>
+  <br />
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Operations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let el of Client">
+        <td>{{el.name}}</td>
+        <td>{{el.description}}</td>
+        <td>
+          <button class="btn btn-primary" (click)="showInvestorList(el.id)">Show list of Investor</button>&nbsp;
+          <button class="btn btn-primary" (click)="callupdate(el)">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button class="btn btn-primary" (click)="createNewClient()">Create Client</button>
+  <br /><br />
+  <div *ngIf="!isCreated" class="jumbotron col-4-4" style="text-align:center">
+    <h1>CREATE A CLIENT</h1><br />
+    <form name="form" #clientForm="ngForm" (ngSubmit)="onSubmit(clientForm.value)">
+      <div class="form-group">
+        <label for="name"><b>Name:</b></label>
+        <input type="text" class="form-control" [(ngModel)]="name" name="name">
+
+      </div>
+
+      <div class="form-group">
+        <label for="description"><b>Description:</b></label>
+        <input type="text" class="form-control" [(ngModel)]="description" name="description">
+
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-primary">Register</button>
+      </div>
+
+    </form>
+  </div>
+
+
+  <div *ngIf="!showEdit" class="jumbotron col-4-4" style="text-align:center">
+    <h1>EDIT A CLIENT</h1><br />
+    <form name="form" #clientEditForm="ngForm" (ngSubmit)="onEdit(clientEditForm.value)">
+      <div class="form-group">
+        <label for="name"><b>Name:</b></label>
+        <input type="text" class="form-control" name="name" value="{{t1}}" [(ngModel)]="t1">
+      </div>
+      <div class="form-group">
+        <label for="description"><b>Description:</b></label>
+        <input type="text" class="form-control" name="description" value="{{t2}}" [(ngModel)]="t2">
+
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-primary">EDIT CLIENT</button>
+      </div>
+
+    </form>
+  </div>
+
+
+  <div *ngIf="!showInvestor">
+    <h2>List of Investors</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th><b>Name</b></th>
+          <th><b>Operations</b></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let inv of allInvestors">
+          <td>{{inv.name}}</td>
+          <td>
+            <button class="btn btn-primary" (click)="showFundList(inv.id)">Show list of Funds</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="!showFund">
+    <h2>List of Funds</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th><b>Amount</b></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fun of funds">
+          <td>{{fun.amount}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
