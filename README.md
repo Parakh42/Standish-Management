@@ -29,3 +29,6 @@ Unit Tests:-
 -Type url "localhost:8080"
 -To create a new client go to /createClient and method POST
 -Enter name and description in JSON format under body section
+
+
+To visit angular code please follow path :-    /src/main/resources/static/restAngular/
